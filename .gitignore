@@ -1,0 +1,7 @@
+terraform.*
+terraform.*.*
+*.tfvars
+modules*
+providers
+environment
+
