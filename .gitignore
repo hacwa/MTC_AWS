@@ -4,4 +4,5 @@ terraform.*.*
 modules*
 providers
 environment
-
+.terraform.lock.hcl
+.gitignore
