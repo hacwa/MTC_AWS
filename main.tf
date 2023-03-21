@@ -1,7 +1,5 @@
 # --- root/main.tf
 
-
-
 module "networking" {
   source           = "./networking"
   vpc_cidr         = local.vpc_cidr

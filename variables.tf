@@ -5,3 +5,4 @@ variable "aws_region" {
 variable "access_ip" {
   type = string
 }
+
