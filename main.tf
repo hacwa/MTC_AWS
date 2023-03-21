@@ -10,4 +10,18 @@ module "networking" {
   max_subnets      = 20
   public_cidrs     = [for i in range(2, 255, 2) : cidrsubnet(local.vpc_cidr, 8, i)]
   private_cidrs    = [for i in range(1, 255, 2) : cidrsubnet(local.vpc_cidr, 8, i)]
+  db_subnet_group  = true
+}
+
+module "database" {
+  source                 = "./database"
+  db_engine_version      = "5.7.33"
+  db_instance_class      = "db.t2.micro"
+  dbname                 = "rancher"
+  dbuser                 = "bobby"
+  dbpassword             = "mdefgigbf"
+  db_identifier          = "mtc-db"
+  skip_db_snapshot       = true
+  db_subnet_group_name   = module.networking.db_subnet_group_name[0]
+  vpc_security_group_ids = module.networking.db_security_group
 }

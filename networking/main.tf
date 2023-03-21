@@ -99,7 +99,7 @@ resource "aws_security_group" "mtc_sg" {
       cidr_blocks = ingress.value.cidr_blocks
     }
   }
-    egress {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = -1
@@ -109,3 +109,12 @@ resource "aws_security_group" "mtc_sg" {
 }
 
 
+resource "aws_db_subnet_group" "mtc_rds_subnetgroup" {
+  count = var.db_subnet_group ? 1 : 0
+  #  count = var.db_subnet_group == true ? 1 : 0
+  name       = "mtc_rds_subnetgroup"
+  subnet_ids = aws_subnet.mtc_private_subnet.*.id
+  tags = {
+    Name = "mtc_rds_sng"
+  }
+}
