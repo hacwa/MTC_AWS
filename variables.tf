@@ -8,16 +8,16 @@ variable "access_ip" {
 }
 
 variable "db_name" {
-  type = string  
+  type = string
 }
 
 variable "dbuser" {
-  type = string 
-  sensitive = "true" 
+  type      = string
+  sensitive = "true"
 }
 
 variable "dbpassword" {
-  type = string  
-  sensitive = "true" 
+  type      = string
+  sensitive = "true"
 
 }
