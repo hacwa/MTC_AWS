@@ -7,7 +7,7 @@ variable "access_ip" {
   type = string
 }
 
-variable "dbname" {
+variable "db_name" {
   type = string
 }
 

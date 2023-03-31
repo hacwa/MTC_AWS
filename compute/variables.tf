@@ -10,5 +10,5 @@ variable "key_name" {}
 variable "user_data_path" {}
 variable "dbuser" {}
 variable "dbpassword" {}
-variable "dbname" {}
+variable "db_name" {}
 variable "db_endpoint" {}

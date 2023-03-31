@@ -1,6 +1,6 @@
 #   --- database/variables.tf
 variable "db_instance_class" {}
-variable "dbname" {}
+variable "db_name" {}
 variable "dbuser" {}
 variable "dbpassword" {}
 variable "vpc_security_group_ids" {}

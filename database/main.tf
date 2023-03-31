@@ -5,7 +5,7 @@ resource "aws_db_instance" "mtc_db" {
   engine                 = "mysql"
   engine_version         = var.db_engine_version
   instance_class         = var.db_instance_class
-     name                = var.dbname
+  name                   = var.db_name
   username               = var.dbuser
   password               = var.dbpassword
   db_subnet_group_name   = var.db_subnet_group_name
@@ -16,3 +16,5 @@ resource "aws_db_instance" "mtc_db" {
     Name = "mtc-db"
   }
 }
+
+#    aws_db_instance.mtc_db.endpoint

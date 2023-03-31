@@ -17,7 +17,7 @@ module "database" {
   source                 = "./database"
   db_engine_version      = "5.7.33"
   db_instance_class      = "db.t2.micro"
-  dbname                 = var.dbname
+  db_name                 = var.db_name
   dbuser                 = var.dbuser
   dbpassword             = var.dbpassword
   db_identifier          = "mtc-db"
@@ -43,7 +43,7 @@ module "loadbalancing" {
 
 module "compute" {
   source          = "./compute"
-  instance_count  = 1
+  instance_count  = 2
   instance_type   = "t3.micro"
   public_sg       = module.networking.public_sg
   public_subnets  = module.networking.public_subnets
@@ -53,7 +53,7 @@ module "compute" {
   user_data_path  = "${path.root}/userdata.tpl"
   dbuser = var.dbuser
   dbpassword = var.dbpassword
-  dbname = var.dbname
+  db_name = var.db_name
   db_endpoint = module.database.db_endpoint
 
 }
