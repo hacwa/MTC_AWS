@@ -56,5 +56,6 @@ module "compute" {
   db_name = var.db_name
   db_endpoint = module.database.db_endpoint
   lb_target_group_arn = module.loadbalancing.lb_target_group_arn
-
+  tgport = 8000
+  
 }

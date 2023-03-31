@@ -12,6 +12,5 @@ variable "dbuser" {}
 variable "dbpassword" {}
 variable "db_name" {}
 variable "db_endpoint" {}
-variable "lb_target_group_arn" {
-  
-}
+variable "lb_target_group_arn" {}
+variable "tgport" {}
