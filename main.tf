@@ -13,18 +13,18 @@ module "networking" {
   db_subnet_group  = true
 }
 
-#module "database" {
-#  source                 = "./database"
-#  db_engine_version      = "5.7.33"
-#  db_instance_class      = "db.t2.micro"
-#  db_name                = var.db_name
-#  dbuser                 = var.dbuser
-#  dbpassword             = var.dbpassword
-#  db_identifier          = "mtc-db"
-#  skip_db_snapshot       = true
-#  db_subnet_group_name   = module.networking.db_subnet_group_name[0]
-#  vpc_security_group_ids = module.networking.db_security_group
-#}
+module "database" {
+  source                 = "./database"
+  db_engine_version      = "5.7.33"
+  db_instance_class      = "db.t2.micro"
+  dbname                 = var.dbname
+  dbuser                 = var.dbuser
+  dbpassword             = var.dbpassword
+  db_identifier          = "mtc-db"
+  skip_db_snapshot       = true
+  db_subnet_group_name   = module.networking.db_subnet_group_name[0]
+  vpc_security_group_ids = module.networking.db_security_group
+}
 
 module "loadbalancing" {
   source                 = "./loadbalancing"
@@ -42,12 +42,18 @@ module "loadbalancing" {
 }
 
 module "compute" {
-  source         = "./compute"
-  instance_count = 1
-  instance_type  = "t3.micro"
-  public_sg      = module.networking.public_sg
-  public_subnets = module.networking.public_subnets
-  vol_size       = 10
-  key_name = "mtckey"
+  source          = "./compute"
+  instance_count  = 1
+  instance_type   = "t3.micro"
+  public_sg       = module.networking.public_sg
+  public_subnets  = module.networking.public_subnets
+  vol_size        = 10
+  key_name        = "mtckey"
   public_key_path = "/home/hacwa/.ssh/keymtc.pub"
+  user_data_path  = "${path.root}/userdata.tpl"
+  dbuser = var.dbuser
+  dbpassword = var.dbpassword
+  dbname = var.dbname
+  db_endpoint = module.database.db_endpoint
+
 }
