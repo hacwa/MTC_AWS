@@ -37,7 +37,7 @@ module "loadbalancing" {
   lb_unhealthy_threshold = 2
   lb_timeout             = 3
   lb_interval            = 30
-  listener_port          = 8000
+  listener_port          = 80
   listener_protocol      = "HTTP"
 }
 
@@ -55,5 +55,6 @@ module "compute" {
   dbpassword = var.dbpassword
   db_name = var.db_name
   db_endpoint = module.database.db_endpoint
+  lb_target_group_arn = module.loadbalancing.lb_target_group_arn
 
 }
